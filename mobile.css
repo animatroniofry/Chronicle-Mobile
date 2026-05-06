@@ -1,0 +1,459 @@
+
+/* ═══════════════════════════════════════════════════════════════
+   CHRONICLE — MOBILE RESPONSIVE CSS
+   Breakpoints: 768px (tablet), 480px (phone)
+   Prístup: sidebar sa zmení na bottom nav bar na mobile
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Základný layout ── */
+  .app-body {
+    flex-direction: column;
+    min-height: calc(100vh - 52px);
+    padding-bottom: 64px; /* miesto pre bottom nav */
+  }
+
+  /* ── Header ── */
+  .app-header {
+    padding: 8px 12px;
+    min-height: 52px;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .header-title { font-size: 16px; letter-spacing: 2px; }
+  .header-subtitle { display: none; }
+  .header-actions { gap: 5px; }
+  .header-actions .btn-sm { padding: 5px 8px; font-size: 9px; letter-spacing: 0.5px; }
+  /* Schovaj menej dôležité buttony v headeri */
+  .header-actions .btn-silver:not(:first-of-type) { display: none; }
+
+  /* ── Sidebar → Bottom Navigation Bar ── */
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 64px;
+    flex-direction: row;
+    border-right: none;
+    border-top: 2px solid var(--border-gold);
+    z-index: 200;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
+    overflow: hidden;
+    padding: 0;
+  }
+  .sidebar.collapsed {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 64px;
+  }
+
+  /* Schovaj sidebar toggle button — nepotrebný na mobile */
+  .sidebar-toggle { display: none; }
+
+  /* Sidebar nav → horizontálny scroll */
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0;
+    gap: 0;
+    width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    align-items: stretch;
+  }
+  .sidebar-nav::-webkit-scrollbar { display: none; }
+
+  /* Nav section labels schovaj */
+  .nav-section-label,
+  .nav-section-divider { display: none; }
+
+  /* Tab buttony → vertikálne ikona+label */
+  .tab-btn {
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 8px;
+    min-width: 60px;
+    height: 64px;
+    border-radius: 0;
+    border-right: 1px solid var(--border-dark);
+    border-bottom: none;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 8px;
+    letter-spacing: 0.3px;
+  }
+  .tab-btn.active {
+    border-bottom: 3px solid var(--accent-gold);
+    border-right: 1px solid var(--border-dark);
+    background: rgba(212,168,67,0.1);
+  }
+  .tab-icon { font-size: 18px; line-height: 1; }
+  .tab-label { font-size: 7.5px; letter-spacing: 0; white-space: nowrap; }
+
+  /* Collapsed state ignoruj na mobile */
+  .sidebar.collapsed .tab-label { display: block; opacity: 1; }
+  .sidebar.collapsed .tab-btn { opacity: 1; }
+  .sidebar.collapsed .nav-section-label { display: none; }
+
+  /* ── Main content ── */
+  .main-content {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
+  /* ── Gridy → single column ── */
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Character tab hlavný grid (portrait + identity) */
+  #tab-character > .grid-2:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+
+  /* ── Portrait ── */
+  .portrait-frame-wrapper {
+    max-height: 280px;
+  }
+  .photo-container {
+    height: 240px !important;
+  }
+
+  /* ── Panely ── */
+  .panel { padding: 12px; }
+  .panel-sm { padding: 8px; }
+
+  /* ── Section headers ── */
+  .section-header {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+
+  /* ── Stat boxy (ability scores) → 3x2 grid ── */
+  .stats-grid,
+  [id*="abilityScore"],
+  .ability-scores-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* ── Inputs a textarey ── */
+  input[type="text"], input[type="number"], textarea, select {
+    font-size: 14px; /* prevents iOS zoom */
+  }
+
+  /* ── Buttons ── */
+  .btn { padding: 7px 12px; font-size: 10px; }
+  .btn-sm { padding: 5px 9px; font-size: 9px; }
+
+  /* ── Settings panel ── */
+  .settings-panel {
+    width: calc(100vw - 20px);
+    right: 10px;
+    left: 10px;
+    max-height: 70vh;
+  }
+
+  /* ── Floating panels (dice, combat HUD atď.) ── */
+  .dice-roller,
+  .quick-roll-wrapper,
+  .combat-hud-wrapper,
+  .allies-panel-wrapper,
+  .priority-hud-wrapper {
+    width: calc(100vw - 20px) !important;
+    max-width: calc(100vw - 20px) !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 74px !important; /* nad bottom nav */
+  }
+
+  /* ── FAB buttons ── */
+  #fabContainer {
+    bottom: 74px;
+    right: 14px;
+  }
+
+  /* ── Rewards panel chips ── */
+  .rewards-title-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── Achievement grid ── */
+  #achv-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Combat/spell tab specifics ── */
+  .spell-level-group,
+  .spell-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Tabs content padding ── */
+  .tab-content { padding-bottom: 10px; }
+
+  /* ── Initiative strip ── */
+  .init-strip {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* ── Toast notifications ── */
+  #toastContainer {
+    bottom: 74px;
+  }
+
+  /* ── Safe area pre notch (iPhone) ── */
+  .sidebar {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(64px + env(safe-area-inset-bottom));
+  }
+  .app-body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ── Extra small phones (< 400px) ── */
+@media (max-width: 400px) {
+  .tab-btn { min-width: 52px; padding: 6px 4px; }
+  .tab-label { font-size: 7px; }
+  .header-title { font-size: 14px; }
+  .header-actions .settings-btn { width: 28px; height: 28px; font-size: 13px; }
+  .panel { padding: 10px; }
+  .rewards-title-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Tablet landscape (768px - 1024px) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar { width: 180px; min-width: 180px; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .main-content { padding: 12px; }
+}
+
+/* ── PWA standalone mode — schovaj browser UI ── */
+@media (display-mode: standalone) {
+  .app-header {
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHRONICLE — MOBILE FIXES (rozšírené)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Prevent horizontal scroll ── */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* ── Fix double body tag issue ── */
+  body { width: 100%; max-width: 100vw; }
+
+  /* ── App wrapper ── */
+  .app-wrapper, #app {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* ── Header — schovaj niektoré tlačidlá ── */
+  .header-actions .btn-danger { display: none; }
+  .header-actions .btn-silver { display: none; }
+  .header-actions .btn-primary { display: block; }
+
+  /* ── Combat stats grid → 3 stĺpce na mobile ── */
+  .combat-stat-grid,
+  #tab-combat > .panel > div[style*="grid"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* ── HP display — plná šírka ── */
+  .hp-display {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* ── Spell cards → 1 stĺpec ── */
+  .spell-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Cantrip grid ── */
+  .cantrip-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Tables — horizontálny scroll ── */
+  .table-wrapper, table {
+    overflow-x: auto;
+    display: block;
+    max-width: 100%;
+  }
+
+  /* ── Inline flex wraps ── */
+  div[style*="display:flex"],
+  div[style*="display: flex"] {
+    flex-wrap: wrap;
+  }
+
+  /* ── Settings panel ── */
+  .settings-panel {
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    border-radius: 0 !important;
+    max-height: calc(100vh - 130px) !important;
+    overflow-y: auto;
+  }
+
+  /* ── Theme grid ── */
+  .theme-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* ── Modal dialogy ── */
+  .modal-content, .modal-box, [class*="modal"] {
+    width: calc(100vw - 20px) !important;
+    max-width: calc(100vw - 20px) !important;
+    margin: 10px !important;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+
+  /* ── Portrait wrapper ── */
+  .portrait-col {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Wild Shape stat boxes ── */
+  .ws-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* ── Companions grid ── */
+  .companions-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Map canvas — plná šírka ── */
+  .map-editor-wrap, #mapCanvas {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Initiative strip → scroll ── */
+  .init-strip-wrap {
+    overflow-x: auto;
+  }
+
+  /* ── Number inputs ── */
+  input[type="number"] {
+    -moz-appearance: textfield;
+    min-width: 40px;
+  }
+
+  /* ── Skill list ── */
+  .skills-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Bardic inspiration pips wrap ── */
+  #bardicPips {
+    flex-wrap: wrap !important;
+  }
+
+  /* ── Quest/NPC cards ── */
+  .quest-card, .npc-card, .lore-card {
+    width: 100% !important;
+  }
+
+  /* ── Spell slot rows ── */
+  .spell-slot-row {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* ── Hide non-essential columns in tables ── */
+  .inv-table th:last-child,
+  .inv-table td:last-child {
+    display: none;
+  }
+
+  /* ── FAB menu ── */
+  .fab-menu {
+    bottom: 80px !important;
+  }
+
+  /* ── Scroll snap pre tab obsah ── */
+  .tab-content {
+    scroll-behavior: smooth;
+  }
+
+  /* ── Resistance table ── */
+  .resistance-table {
+    font-size: 11px;
+  }
+  .resistance-table th, .resistance-table td {
+    padding: 4px 6px;
+  }
+
+  /* ── Achievement grid ── */
+  .achv-card {
+    min-width: unset !important;
+    width: 100%;
+  }
+
+  /* ── Calendar grid ── */
+  .calendar-grid {
+    font-size: 11px;
+  }
+  .cal-day {
+    padding: 3px !important;
+    font-size: 10px;
+  }
+
+  /* ── Multiclass tracker ── */
+  .multiclass-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ── Combat HUD keď je otvorený ── */
+  .combat-hud-wrapper {
+    max-height: calc(100vh - 140px) !important;
+    overflow-y: auto !important;
+  }
+
+}
+
+/* ── Landscape mobile ── */
+@media (max-width: 768px) and (orientation: landscape) {
+  .sidebar {
+    height: 54px !important;
+  }
+  .tab-btn {
+    height: 54px !important;
+  }
+  .app-body {
+    padding-bottom: 54px !important;
+  }
+  .photo-container {
+    height: 160px !important;
+  }
+}
