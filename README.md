@@ -4,7 +4,7 @@ A mobile-friendly Progressive Web App version of Chronicle — a D&D 5th Edition
 
 ## 🌐 Live App
 
-👉 [Open Chronicle Mobile](https://animatroniofry.github.io/chronicle-mobile/)
+👉 [Open Chronicle Mobile](https://animatroniofry.github.io/Chronicle-Mobile/)
 
 ## 📱 How to Install on Your Phone
 
